@@ -222,8 +222,5 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webpack-assets
 
-RUBY VERSION
-   ruby 2.3.4p301
-
 BUNDLED WITH
-   1.16.1
+   1.17.3
