@@ -1,8 +1,12 @@
 const path = require("path");
+const glob = require("glob");
 const merge = require("webpack-merge");
 const AssetsPlugin = require("assets-webpack-plugin");
 
 const baseConfig = require("./webpack.config.base");
+
+const entryPath = path.resolve(__dirname, "../frontend/ssr/");
+const entries = glob.sync(`${entryPath}*/**.js`);
 
 module.exports = merge(baseConfig, {
   target: "web",
@@ -10,10 +14,10 @@ module.exports = merge(baseConfig, {
     fs: "empty",
     module: "empty"
   },
-  entry: path.resolve(__dirname, "../frontend/client.js"),
+  entry: entries,
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname, "../public/frontend"),
+    path: path.resolve(__dirname, "../public/frontend/ssr"),
     publicPath: "/frontend/"
   },
   plugins: [new AssetsPlugin()],
