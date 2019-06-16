@@ -1,8 +1,8 @@
 <template>
   <section>
     <count :count="count"></count>
-    <button @click="handleIncrement">increment</button>
-    <button @click="handleDecrement">async decrement</button>
+    <button @click="increment">increment</button>
+    <button @click="decrement">async decrement</button>
   </section>
 </template>
 
@@ -13,23 +13,17 @@ export default {
   components: {
     Count
   },
-  data() {
-    return {
-      count: 0
-    };
+  computed: {
+    count() {
+      return this.$store.state.count;
+    }
   },
   methods: {
-    handleIncrement() {
-      this.count += 1;
+    increment() {
+      this.$store.commit("increment");
     },
-    async handleDecrement() {
-      const p = new Promise(resolve => {
-        setTimeout(() => {
-          resolve(this.count - 1);
-        }, 1000);
-      });
-      const count = await p;
-      this.count = count;
+    decrement() {
+      this.$store.commit("decrement");
     }
   }
 };
